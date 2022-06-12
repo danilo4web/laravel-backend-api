@@ -32,4 +32,14 @@ class TransactionRepository extends AbstractRepository implements TransactionRep
             ->whereYear('created_at', $year)
             ->sum('amount');
     }
+
+    public function findPerMonth(int $accountId, string $month)
+    {
+        list($year, $month) = explode("-", $month);
+
+        return Transaction::where('account_id', $accountId)
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->get();
+    }
 }

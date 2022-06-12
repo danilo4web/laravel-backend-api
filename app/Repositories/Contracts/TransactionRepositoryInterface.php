@@ -17,4 +17,6 @@ interface TransactionRepositoryInterface
     public function findByTypePerMonth(int $accountId, string $transactionType, string $month);
 
     public function getTotalTransactionsAmountPerMonth(int $accountId, string $month, string $transactionType);
+
+    public function findPerMonth(int $accountId, string $month);
 }

@@ -48,6 +48,17 @@ class TransactionController extends Controller
         );
     }
 
+    public function transactionsPerMonth(Request $request, string $month): JsonResponse
+    {
+        $data = $request->all();
+
+        $transactions = $this->transactionRepository->findPerMonth($data['account_id'], $month);
+
+        return response()->json(
+            TransactionResource::collection($transactions),
+            Response::HTTP_OK
+        );
+    }
 
     public function addDebit(Request $request)
     {

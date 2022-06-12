@@ -10,7 +10,6 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('social_number', 10)->unique();
             $table->string('name', 255);
             $table->string('address', 255)->nullable();
             $table->tinyInteger('status');

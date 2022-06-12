@@ -11,6 +11,6 @@ class CheckRepository extends AbstractRepository implements CheckRepositoryInter
 
     public function findByStatus(string $status)
     {
-        return Check::where('status', $status)->get();
+        return Check::where('status', $status)->orderBy('created_at', 'DESC')->get();
     }
 }

@@ -32,7 +32,6 @@ class CustomerController extends Controller
 
         $validator = Validator::make($data, [
             'name' => 'required|string|max:255',
-            'social_number' => 'required|integer|max:9999999999|unique:customers'
         ]);
 
         if ($validator->fails()) {

@@ -10,7 +10,6 @@ class Customer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'social_number',
         'name',
         'status',
         'user_id',

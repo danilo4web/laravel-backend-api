@@ -47,6 +47,7 @@ Route::group(
 
         Route::post('transactions/debits/{month}', [App\Http\Controllers\API\TransactionController::class, 'debitTransactionsPerMonth']);
         Route::post('transactions/credits/{month}', [App\Http\Controllers\API\TransactionController::class, 'creditTransactionsPerMonth']);
+        Route::post('transactions/month/{month}', [App\Http\Controllers\API\TransactionController::class, 'transactionsPerMonth']);
         Route::get('transactions/{transaction}', [App\Http\Controllers\API\TransactionController::class, 'show']);
         Route::post('purchase', [App\Http\Controllers\API\TransactionController::class, 'addDebit']);
     }

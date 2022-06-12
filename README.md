@@ -35,4 +35,4 @@
 ![alt text](https://raw.githubusercontent.com/danilo4web/laravel-backend-api/feature/development/database/eer.png)
 
 ## Postman collection with all the endpoints:
-[here](https://raw.githubusercontent.com/danilo4web/laravel-backend-api/feature/development/BNBBank.postman_collection.json)
+[download here](https://raw.githubusercontent.com/danilo4web/laravel-backend-api/feature/development/BNBBank.postman_collection.json)

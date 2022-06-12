@@ -72,8 +72,7 @@ class AuthController extends Controller
                 'user_id' => $userId,
                 'name' => $data['name'],
                 'status' => 1,
-                'address' => 'A',
-                'social_number' => rand(1, 100)
+                'address' => 'A'
             ]);
 
             return $this->accountRepository->store([
@@ -107,7 +106,8 @@ class AuthController extends Controller
                 'access_token' => $token,
                 'token_type' => 'Bearer',
                 'id' => $user->id,
-                'account_number' => $account->number
+                'account_number' => $account->number,
+                'account_id' => $account->id
             ]);
     }
 

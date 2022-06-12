@@ -15,7 +15,6 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
-            'social_number' => $this->faker->numberBetween(1000000, 999999999),
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
             'status' => $this->faker->boolean(),
