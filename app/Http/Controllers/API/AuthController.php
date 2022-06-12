@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -95,12 +97,17 @@ class AuthController extends Controller
         $user = User::where('email', $request['email'])->firstOrFail();
 
         $token = $user->createToken('auth_token')->plainTextToken;
+        $customer = Customer::where('user_id', $user->id)->first();
+
+        $account = Account::where('customer_id', $customer->id)->first();
 
         return response()
             ->json([
                 'message' => 'Hi ' . $user->name . ', welcome to BNB Back',
                 'access_token' => $token,
-                'token_type' => 'Bearer'
+                'token_type' => 'Bearer',
+                'id' => $user->id,
+                'account_number' => $account->number
             ]);
     }
 

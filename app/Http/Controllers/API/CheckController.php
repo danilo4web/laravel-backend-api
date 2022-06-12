@@ -98,7 +98,6 @@ class CheckController extends Controller
 
     public function show(int $checkId): JsonResponse
     {
-        exit($checkId);
         $check = $this->checkRepository->find($checkId);
 
         return response()->json(new CheckResource($check), Response::HTTP_OK);

@@ -30,3 +30,6 @@
 
 ## Run jobs queue
 ```docker-compose run --rm artisan queue:work --tries=1```
+
+## EER Database
+![alt text](https://github.com/danilo4web/laravel-backend-api/tree/feature/development/database/err.png)
