@@ -20,7 +20,7 @@
 ```docker-compose run --rm artisan migrate --seed```
 
 ## Run the integration tests
-```ocker-compose run --rm php vendor/bin/phpunit --colors=always```
+```docker-compose run --rm php vendor/bin/phpunit --colors=always```
 
 ## Export a HTML coverage test
 ```docker-compose run --rm php vendor/bin/phpunit --colors=always --coverage-html code-coverage```
