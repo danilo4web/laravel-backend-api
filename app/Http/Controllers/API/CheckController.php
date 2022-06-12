@@ -90,9 +90,8 @@ class CheckController extends Controller
         try {
             $check = $this->checkRepository->store($data);
         } catch (Exception $e) {
-            dd($e);
+            Log::error($e->getMessage());
         }
-        
 
         return response()->json(new CheckResource($check), Response::HTTP_CREATED);
     }

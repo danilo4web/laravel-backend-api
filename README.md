@@ -24,3 +24,9 @@
 
 ## Export a HTML coverage test
 ```docker-compose run --rm php vendor/bin/phpunit --colors=always --coverage-html code-coverage```
+
+## Check PSR-12
+```docker-compose run --rm composer check-psr12```
+
+## Run jobs queue
+```docker-compose run --rm artisan queue:work --tries=1```
