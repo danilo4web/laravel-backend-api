@@ -1,0 +1,8 @@
+
+vendor
+.env
+code-coverage/
+storage/
+*.log
+*.lock
+*.cache

@@ -1,0 +1,9 @@
+{
+    "php.suggest.basic": false,
+    "phpSniffer.run": "onType",
+    "phpSniffer.autoDetect": true,
+    "phpSniffer.standard": "PSR12",
+    "[php]": {
+      "editor.defaultFormatter": "wongjn.php-sniffer"
+    }
+}
