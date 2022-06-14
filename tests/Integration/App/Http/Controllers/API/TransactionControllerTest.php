@@ -16,10 +16,16 @@ class TransactionControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected $user;
+    protected $admin;
+    protected $customer;
+    protected $account;
+
     public function setUp(): void
     {
         parent::setUp();
 
+        $this->admin = Admin::find(1);
         $this->user = User::factory()->create();
         $this->customer = Customer::factory()->create();
         $this->account = Account::factory()->create();
@@ -41,13 +47,13 @@ class TransactionControllerTest extends TestCase
 
     public function testShouldReturnCreditTransactionsPerMonth()
     {
-        $this->actingAs($this->user);
-
         $payload = [
             "account_id" => 1
         ];
 
         $creditInfo = $this->generateChecksAndApproveItAsCreditTransactions(10);
+
+        $this->actingAs($this->user);
 
         $response = $this->postJson('/api/v1/transactions/credits/' . date('Y') . '-' . date('m'), $payload)
             ->assertStatus(Response::HTTP_OK)
@@ -58,17 +64,14 @@ class TransactionControllerTest extends TestCase
     private function generateChecksAndApproveItAsCreditTransactions($quantity): array
     {
         $checks = Check::factory()->times($quantity)->create();
-        $administrator = Admin::factory()->create();
+
+        $this->actingAs($this->admin);
 
         $creditAmount = 0;
         $processedChecks = 0;
         foreach ($checks as $check) {
             if ($check['status'] === 'pending') {
-                $payload = [
-                    'admin_id' => $administrator['id']
-                ];
-
-                $this->putJson("/api/v1/checks/" . $check['id'] . "/approve", $payload)
+                $this->putJson("/api/v1/admin/checks/" . $check['id'] . "/approve")
                     ->assertStatus(Response::HTTP_OK);
 
                 $creditAmount += $check['amount'];

@@ -3,23 +3,43 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
+    use HasApiTokens;
     use HasFactory;
+    use Notifiable;
+    
+    protected $guard = 'admin';
 
     public const ENABLE = 1;
     public const DISABLED = 0;
 
     protected $fillable = [
         'name',
-        'status',
-        'user_id',
+        'email',
+        'password',
+        'is_active'
     ];
 
-    public function user()
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    public function generateToken()
     {
-        return $this->hasOne(User::class);
+        $this->api_token = Str::random(60);
+        $this->save();
+
+        return $this->api_token;
     }
 }

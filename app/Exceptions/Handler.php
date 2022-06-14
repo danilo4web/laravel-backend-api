@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -34,10 +37,15 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(
-            function (Throwable $e) {
-                //
-            }
-        );
-    }
+         $this->renderable(function(Exception $e, $request) {
+             return $this->handleException($request, $e);
+         });
+     }
+
+     public function handleException($request, Exception $exception)
+     {
+         if($exception instanceof MethodNotAllowedHttpException) {
+            return response('The specified URL cannot be  found.', Response::HTTP_NOT_FOUND);
+         }
+     }
 }

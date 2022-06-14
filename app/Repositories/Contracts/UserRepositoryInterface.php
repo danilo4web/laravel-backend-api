@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Contracts;
 
-interface CustomerRepositoryInterface
+use App\Models\User;
+
+interface UserRepositoryInterface
 {
     public function all();
 
@@ -14,5 +16,5 @@ interface CustomerRepositoryInterface
 
     public function delete(int $id);
 
-    public function findCustomerByUser(int $userId);
+    public function findByEmail(string $email);
 }

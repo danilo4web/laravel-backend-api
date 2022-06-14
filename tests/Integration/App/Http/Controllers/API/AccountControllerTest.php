@@ -17,6 +17,7 @@ class AccountControllerTest extends TestCase
     use RefreshDatabase;
     
     protected $user;
+    protected $admin;
     protected $customer;
     protected $account;
 
@@ -25,6 +26,7 @@ class AccountControllerTest extends TestCase
         parent::setUp();
 
         $this->user = User::factory()->create();
+        $this->admin = Admin::find(1);
         $this->customer = Customer::factory()->create();
         $this->account = Account::factory()->create();
     }
@@ -42,7 +44,7 @@ class AccountControllerTest extends TestCase
     public function testShouldReturnAnAccountResume()
     {
         $this->actingAs($this->user);
-        
+
         $creditAmount = $this->getCreditAmount();
         $debitAmount = $this->getDebitAmount();
         $expectedBalance = $creditAmount - $debitAmount;
@@ -62,16 +64,13 @@ class AccountControllerTest extends TestCase
 
     private function getCreditAmount(): float
     {
+        $this->actingAs($this->user);
         $checks = Check::factory()->times(5)->create();
-        $administrator = Admin::factory()->create();
 
         $creditAmount = 0;
         foreach ($checks as $check) {
             if ($check['status'] === 'pending') {
-                $payload = [
-                    'admin_id' => $administrator['id']
-                ];
-                $this->putJson("/api/v1/checks/" . $check['id'] . "/approve", $payload)
+                $this->putJson("/api/v1/admin/checks/" . $check['id'] . "/approve")
                     ->assertStatus(Response::HTTP_OK)
                     ->assertJson(['message' => 'Check approved: ' . $check['id']]);
 

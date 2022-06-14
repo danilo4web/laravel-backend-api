@@ -27,4 +27,9 @@ class AccountRepository extends AbstractRepository implements AccountRepositoryI
     {
         return Account::find($accountId)->value('balance');
     }
+    
+    public function findAccountByCustomer(int $customerId)
+    {
+        return Account::where('customer_id', $customerId)->first();
+    }
 }

@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"danilo\",\n    \"email\": \"danilo\",\n    \"password\": \"teste\"\n}",
+					"raw": "{\n    \"name\": \"danilo\",\n    \"email\": \"danilo4web@gmail.c1om\",\n    \"password\": \"152634789\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,17 +20,18 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/register",
+					"raw": "http://0.0.0.0:8080/api/v1/register",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
 						"api",
+						"v1",
 						"register"
 					]
 				}
@@ -44,7 +45,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"danilo\",\n    \"email\": \"danilo\",\n    \"password\": \"teste\"\n}",
+					"raw": "{\n    \"email\": \"danilo4web@gmail.c1om\",\n    \"password\": \"152634789\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -52,18 +53,19 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/register",
+					"raw": "http://0.0.0.0:8080/api/v1/login",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
 						"api",
-						"register"
+						"v1",
+						"login"
 					]
 				}
 			},
@@ -87,15 +89,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/v1/profile",
+					"raw": "http://0.0.0.0:8080/api/v1/profile",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -113,7 +115,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "5|roqjMQ0B8bOpNhPCnvNfnjLbLGRwMEazyiwB2gs9",
+							"value": "5|vsDuD0NRL2yTtJIsI0sGfgFwZ9vlh7uT5Zzve8Uu",
 							"type": "string"
 						}
 					]
@@ -130,15 +132,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/v1/logout",
+					"raw": "http://0.0.0.0:8080/api/v1/logout",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -154,108 +156,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/checks",
+					"raw": "http://0.0.0.0:8080/api/v1/checks",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
+						"api",
+						"v1",
 						"checks"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET All Customers",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/checks",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"checks"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Checks - Pending",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/checks/pending",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"checks",
-						"pending"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Checks - Approved",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/checks/accepted",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"checks",
-						"accepted"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Checks - Rejected",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/checks/rejected",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"checks",
-						"rejected"
 					]
 				}
 			},
@@ -276,17 +189,18 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/accounts/resume/2022-06",
+					"raw": "http://0.0.0.0:8080/api/v1/accounts/resume/2022-06",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
 						"api",
+						"v1",
 						"accounts",
 						"resume",
 						"2022-06"
@@ -302,7 +216,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"account_id\": 1,\n    \"month\": \"2022-06\"\n}",
+					"raw": "{\n    \"account_id\": 1\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -310,19 +224,21 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/transactions/debit",
+					"raw": "http://0.0.0.0:8080/api/v1/transactions/credits/2022-06",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
 						"api",
+						"v1",
 						"transactions",
-						"debit"
+						"credits",
+						"2022-06"
 					]
 				}
 			},
@@ -334,19 +250,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/transactions/13/debits/2022-06",
+					"raw": "http://0.0.0.0:8080/api/v1/transactions/debits/2022-06",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
 						"api",
+						"v1",
 						"transactions",
-						"13",
 						"debits",
 						"2022-06"
 					]
@@ -369,106 +285,19 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/purchase",
+					"raw": "http://0.0.0.0:8080/api/v1/purchase",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
 						"api",
+						"v1",
 						"purchase"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Check - Approve!",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"admin_id\": 1\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/api/checks/12/approve",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"checks",
-						"12",
-						"approve"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Reject Check",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"check_id\": 1, \n    \"status\": \"rejected\", \n    \"admin_id\": 1\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/checks/1",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"checks",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Accounts",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/checks",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"checks"
 					]
 				}
 			},
@@ -480,16 +309,18 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/checks",
+					"raw": "http://0.0.0.0:8080/api/v1/checks",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
+						"api",
+						"v1",
 						"checks"
 					]
 				}
@@ -502,16 +333,18 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/checks",
+					"raw": "http://0.0.0.0:8080/api/v1/checks",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
+						"api",
+						"v1",
 						"checks"
 					]
 				}
@@ -524,16 +357,18 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/checks",
+					"raw": "http://0.0.0.0:8080/api/v1/checks",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
+						"api",
+						"v1",
 						"checks"
 					]
 				}
@@ -555,15 +390,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/v1/customers/20",
+					"raw": "http://0.0.0.0:8080/api/v1/customers/20",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -575,22 +410,59 @@
 			"response": []
 		},
 		{
-			"name": "Transactions - Debit Copy 2",
+			"name": "Transactions - Debit Per Month",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"account_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/transactions/debit/month/2022-06",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						"debit",
+						"month",
+						"2022-06"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Debit Transactions By Month",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/transactions/13/debits/2022-06",
+					"raw": "http://0.0.0.0:8080/api/v1/transactions/13/debits/2022-06",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
 						"api",
+						"v1",
 						"transactions",
 						"13",
 						"debits",
@@ -601,26 +473,377 @@
 			"response": []
 		},
 		{
-			"name": "Transactions - Debit Copy 3",
+			"name": "New Check",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"admin_id\": 1,\n    \"file\": \"https://via.placeholder.com/640x480.png/001133?text=autem\",\n    \"description\": \"Dicki Group\",\n    \"amount\": 19.00,\n    \"account_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/checks",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"checks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Accounts",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/transactions/13/debits/2022-06",
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks",
 					"protocol": "http",
 					"host": [
-						"127",
 						"0",
 						"0",
-						"1"
+						"0",
+						"0"
 					],
-					"port": "8000",
+					"port": "8080",
 					"path": [
 						"api",
-						"transactions",
-						"13",
-						"debits",
-						"2022-06"
+						"v1",
+						"admin",
+						"checks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"admin@bnb.com\",\n    \"password\": \"152634789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/login",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|XTC0Bv6qYW6AkRNAqaGyBucuCd9xUIwaskUFDDpL",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"danilo\",\n    \"email\": \"danilo\",\n    \"password\": \"teste\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/profile",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - GET All Checks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Approved Checks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks/status/approved",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks",
+						"status",
+						"approved"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Pending Checks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks/status/pendingaa",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks",
+						"status",
+						"pendingaa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Rejected Checks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks/status/rejected",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks",
+						"status",
+						"rejected"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Reject a Check",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"check_id\": 1, \n    \"status\": \"rejected\", \n    \"admin_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks/10/reject",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks",
+						"10",
+						"reject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Approve a Check",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"admin_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks/4/approve",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks",
+						"4",
+						"approve"
 					]
 				}
 			},
@@ -632,7 +855,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "2|CX95SGvbZw4mHMJj2yGE749fa382GOxdb5Ot1xyR",
+				"value": "11|UdbG7Ezh8iPOTy2wZ8SKCBlDflMrEZ9QEMhehbDJ",
 				"type": "string"
 			}
 		]

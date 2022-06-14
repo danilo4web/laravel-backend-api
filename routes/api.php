@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/register', [App\Http\Controllers\API\AuthController::class, 'register']);
-Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login']);
+Route::post('/register', [App\Http\Controllers\API\UserController::class, 'register']);
+Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login'])->name('login');
 
-Route::group(
-    ['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get(
             '/profile', function (Request $request) {
-                return auth()->user();
+                return Auth::user();
             }
         );
         Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
@@ -39,11 +40,8 @@ Route::group(
         Route::put('customers/{customer}', [App\Http\Controllers\API\CustomerController::class, 'update']);
         Route::delete('customers/{customer}', [App\Http\Controllers\API\CustomerController::class, 'delete']);
 
-        Route::get('checks/status/{status}', [App\Http\Controllers\API\CheckController::class, 'statusList']);
-        Route::get('checks/{check}', [App\Http\Controllers\API\CheckController::class, 'show']);
         Route::post('checks', [App\Http\Controllers\API\CheckController::class, 'store']);
-        Route::put('checks/{check}/approve', [App\Http\Controllers\API\CheckController::class, 'approve']);
-        Route::put('checks/{check}/reject', [App\Http\Controllers\API\CheckController::class, 'reject']);
+        Route::get('checks/pending', [App\Http\Controllers\API\CheckController::class, 'listPendingChecks']);
 
         Route::post('transactions/debits/{month}', [App\Http\Controllers\API\TransactionController::class, 'debitTransactionsPerMonth']);
         Route::post('transactions/credits/{month}', [App\Http\Controllers\API\TransactionController::class, 'creditTransactionsPerMonth']);

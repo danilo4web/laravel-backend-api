@@ -1,8 +1,8 @@
 <?php
 
 namespace Database\Factories;
+use Illuminate\Support\Str;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AdminFactory extends Factory
@@ -16,8 +16,11 @@ class AdminFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'status' => $this->faker->boolean(),
-            'user_id' => $this->faker->numberBetween(1, User::count()),
+            'email' => mt_rand(0, 1000) . $this->faker->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => '$2y$10$AYLvOEHeXZ5VwkX8Lm93JebW3LJ9yzLpg4bc4k8qhKs8mwxQEhXp2',
+            'remember_token' => Str::random(10),
+            'is_active' => 1
         ];
     }
 }

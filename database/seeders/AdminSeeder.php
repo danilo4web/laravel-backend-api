@@ -15,10 +15,5 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        Admin::create([
-            'name' => 'Administrator',
-            'status' => Admin::ENABLE,
-            'user_id' => 1
-        ]);
     }
 }

@@ -19,4 +19,6 @@ interface AccountRepositoryInterface
     public function addDebit(int $accountId, float $amount);
 
     public function getBalance(int $accountId);
+
+    public function findAccountByCustomer(int $customerId);
 }

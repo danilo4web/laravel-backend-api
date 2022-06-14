@@ -15,4 +15,6 @@ interface CheckRepositoryInterface
     public function delete(int $id);
 
     public function findByStatus(string $status);
+
+    public function findByAccount(int $accountId);
 }

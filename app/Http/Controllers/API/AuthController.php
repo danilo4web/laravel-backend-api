@@ -6,92 +6,37 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Customer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Repositories\Contracts\AccountRepositoryInterface;
-use App\Repositories\Contracts\CustomerRepositoryInterface;
-use Exception;
+use App\Repositories\Contracts\AdminRepositoryInterface;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    private CustomerRepositoryInterface $customerRepository;
-    private AccountRepositoryInterface $accountRepository;
+    private AdminRepositoryInterface $adminRepository;
+    private UserRepositoryInterface $userRepository;
 
-    public function __construct(
-        CustomerRepositoryInterface $customerRepository,
-        AccountRepositoryInterface $accountRepository
-    ) {
-        $this->customerRepository = $customerRepository;
-        $this->accountRepository = $accountRepository;
-    }
-
-    public function register(Request $request)
+    public function __construct(AdminRepositoryInterface $adminRepository, UserRepositoryInterface $userRepository)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(
-                $validator->errors(),
-                Response::HTTP_BAD_REQUEST
-            );
-        }
-
-        $data = $request->all();
-
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password'])
-        ]);
-
-        $account = $this->createAnAccount($user->id, $data);
-        $user['account_number'] = $account['number'];
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()
-            ->json([
-                'data' => $user,
-                'access_token' => $token,
-                'token_type' => 'Bearer'
-            ]);
+        $this->adminRepository = $adminRepository;
+        $this->userRepository = $userRepository;
     }
 
-    private function createAnAccount(int $userId, $data)
-    {
-        try {
-            $customer = $this->customerRepository->store([
-                'user_id' => $userId,
-                'name' => $data['name'],
-                'status' => 1,
-                'address' => 'A'
-            ]);
-
-            return $this->accountRepository->store([
-                'customer_id' => $customer->id,
-                'number' => rand(10000000, 99999999),
-                'status' => 1
-            ]);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-            return response()->json(['message' => 'Something went wrong!', Response::HTTP_BAD_REQUEST]);
-        }
-    }
-
+    
     public function login(Request $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        if (!Auth::attempt([
+            'email' => $request->email, 
+            'password' => $request->password,
+            'is_active' => 1
+        ])) {
             return response()
                 ->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
+
+        config(['sanctum.guard' => 'user']);
 
         $user = User::where('email', $request['email'])->firstOrFail();
 
@@ -108,6 +53,29 @@ class AuthController extends Controller
                 'id' => $user->id,
                 'account_number' => $account->number,
                 'account_id' => $account->id
+            ]);
+    }
+
+    public function adminLogin(Request $request)
+    {
+
+        $admin = $this->adminRepository->findByEmail($request->email);
+
+        if (!$admin || !$admin->is_active || !Hash::check($request->password, $admin->password)) {
+            return response()
+               ->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
+        }
+
+        config(['sanctum.guard' => 'admin']);
+
+        $token = $admin->createToken('auth_token')->plainTextToken;
+
+        return response()
+            ->json([
+                'message' => $admin->name . ' you are logged.',
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+                'id' => $admin->id
             ]);
     }
 

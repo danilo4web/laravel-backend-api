@@ -3,29 +3,36 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PurchasePostRequest;
 use App\Http\Resources\CheckResource;
 use App\Jobs\CreditJob;
+use App\Repositories\Contracts\AccountRepositoryInterface;
 use App\Repositories\Contracts\CheckLogRepositoryInterface;
 use App\Repositories\Contracts\CheckRepositoryInterface;
+use App\Repositories\Contracts\CustomerRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class CheckController extends Controller
 {
     private CheckRepositoryInterface $checkRepository;
     private CheckLogRepositoryInterface $checkLogRepository;
-
+    private CustomerRepositoryInterface $customerRepository;
+    private AccountRepositoryInterface $accountRepository;
 
     public function __construct(
         CheckRepositoryInterface $checkRepository,
-        CheckLogRepositoryInterface $checkLogRepository
+        CheckLogRepositoryInterface $checkLogRepository,
+        CustomerRepositoryInterface $customerRepository,
+        AccountRepositoryInterface $accountRepository
     ) {
         $this->checkRepository = $checkRepository;
         $this->checkLogRepository = $checkLogRepository;
+        $this->customerRepository = $customerRepository;
+        $this->accountRepository = $accountRepository;
     }
 
     public function statusList(string $status): JsonResponse
@@ -39,11 +46,37 @@ class CheckController extends Controller
         return response()->json(CheckResource::collection($checkCollection));
     }
 
+    public function listChecks()
+    {
+        $user = Auth::user();
+
+        $customer = $this->customerRepository->findCustomerByUser($user->id);
+
+        $sccount = $this->accountRepository->findAccountByCustomer($customer->id);
+
+        $checks = $this->checkRepository->findByAccount($sccount->id);
+
+        return response()->json(CheckResource::collection($checks));
+    }
+
+    public function listPendingChecks()
+    {
+        $checks = $this->checkRepository->findByStatus('pending');
+
+        return response()->json(CheckResource::collection($checks));
+    }
+
     public function approve(Request $request, int $checkId): JsonResponse
     {
         $data = $request->all();
 
+        $admin = Auth::guard('admin')->user();
+
         $check = $this->checkRepository->find($checkId);
+
+        if (!$check) {
+            return response()->json(['message' => 'Check not found!'], Response::HTTP_NOT_FOUND);
+        }
 
         $checkArray = $check->toArray();
         if ($checkArray['status'] !== 'pending') {
@@ -52,6 +85,7 @@ class CheckController extends Controller
 
         try {
             $data['check_id'] = $checkId;
+            $data['admin_id'] = $admin->id;
             CreditJob::dispatch($data);
         } catch (Exception $e) {
             Log::error($e->getMessage());
@@ -65,7 +99,17 @@ class CheckController extends Controller
     {
         $data = $request->all();
 
+        $admin = Auth::guard('admin')->user();
+
         $check = $this->checkRepository->find($checkId);
+
+        if (!$check) {
+            return response()->json(['message' => 'Check not found!'], Response::HTTP_NOT_FOUND);
+        }
+
+        if ($check['status'] !== 'pending') {
+            return response()->json(['message' => 'Check is not pending!'], Response::HTTP_FORBIDDEN);
+        }
 
         $checkData = $check->toArray();
         $checkData['status'] = 'rejected';
@@ -73,7 +117,7 @@ class CheckController extends Controller
 
         $this->checkLogRepository->store(
             [
-            'admin_id' => $data['admin_id'],
+            'admin_id' => $admin->id,
             'check_id' => $checkId,
             'status' => 'rejected'
             ]

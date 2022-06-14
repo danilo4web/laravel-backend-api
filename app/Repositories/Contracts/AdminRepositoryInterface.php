@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Contracts;
 
+use App\Models\Admin;
+
 interface AdminRepositoryInterface
 {
     public function all();
@@ -13,4 +15,6 @@ interface AdminRepositoryInterface
     public function update(int $id, array $data);
 
     public function delete(int $id);
+
+    public function findByEmail(string $email);
 }

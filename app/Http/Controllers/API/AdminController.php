@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AdminResource;
 use App\Repositories\Contracts\AdminRepositoryInterface;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -18,41 +18,36 @@ class AdminController extends Controller
         $this->adminRepository = $adminRepository;
     }
 
-    public function index(): JsonResponse
+    public function register(Request $request)
     {
-        $admin = $this->adminRepository->all();
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8'
+        ]);
 
-        return response()->json(AdminResource::collection($admin), Response::HTTP_OK);
-    }
+        if ($validator->fails()) {
+            return response()->json(
+                $validator->errors(),
+                Response::HTTP_BAD_REQUEST
+            );
+        }
 
-    public function store(Request $request): JsonResponse
-    {
-        $data = $request->all();
-        $admin = $this->adminRepository->store($data);
-
-        return response()->json(new AdminResource($admin), Response::HTTP_CREATED);
-    }
-
-    public function show(int $adminId): JsonResponse
-    {
-        $admin = $this->adminRepository->find($adminId);
-
-        return response()->json(new AdminResource($admin), Response::HTTP_OK);
-    }
-
-    public function update(Request $request, int $adminId): JsonResponse
-    {
         $data = $request->all();
 
-        $admin = $this->adminRepository->update($adminId, $data);
+        $admin = $this->adminRepository->store([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password'])
+        ]);
 
-        return response()->json(new AdminResource($admin), Response::HTTP_OK);
-    }
+        $token = $admin->createToken();
 
-    public function delete(int $adminId): JsonResponse
-    {
-        $this->adminRepository->delete($adminId);
-
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+        return response()
+            ->json([
+                'data' => $admin,
+                'access_token' => $token,
+                'token_type' => 'Bearer'
+            ]);
     }
 }
