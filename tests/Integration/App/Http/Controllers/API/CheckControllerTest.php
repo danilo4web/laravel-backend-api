@@ -66,13 +66,61 @@ class CheckControllerTest extends TestCase
             ->assertJson(['message' => 'Check not is pending!']);
     }
 
-    public function testShouldListPendingChecks()
+    public function testShouldListPendingChecksAdmin()
     {
         $this->actingAs($this->admin);
 
         Check::factory()->times(5)->create();
         
         $this->getJson('api/v1/admin/checks/status/pending')
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure([[
+                'file',
+                'description',
+                'amount',
+                'status'
+            ]]);
+    }
+
+    public function testShouldListPendingChecks()
+    {
+        $this->actingAs($this->user);
+
+        Check::factory()->times(5)->create();
+        
+        $this->getJson('api/v1/checks/status/pending')
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure([[
+                'file',
+                'description',
+                'amount',
+                'status'
+            ]]);
+    }
+
+    public function testShouldListChecks()
+    {
+        $this->actingAs($this->admin);
+
+        Check::factory()->times(5)->create();
+        
+        $this->getJson('api/v1/admin/checks')
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure([[
+                'file',
+                'description',
+                'amount',
+                'status'
+            ]]);
+    }
+
+    public function testShouldListChecksAdmin()
+    {
+        $this->actingAs($this->admin);
+
+        Check::factory()->times(5)->create();
+        
+        $this->getJson('api/v1/admin/checks')
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([[
                 'file',
@@ -98,7 +146,7 @@ class CheckControllerTest extends TestCase
                 $approvedChecks++;
             }
         }
-        
+
         $this->getJson('api/v1/admin/checks/status/approved')
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonCount($approvedChecks)
@@ -113,7 +161,38 @@ class CheckControllerTest extends TestCase
     public function testShouldListRejectedChecks()
     {
         $this->actingAs($this->admin);
-        $administrator = User::factory()->create();
+        $checks = Check::factory()->times(5)->create();
+
+        $rejectedChecks = 0;
+        foreach ($checks as $check) {
+            if ($check['status'] === 'pending') {
+                $payload = [
+                    'check_id' => $check['id']
+                ];
+
+                $this->putJson("/api/v1/admin/checks/" . $check['id'] . "/reject")
+                    ->assertStatus(Response::HTTP_OK);
+
+                $rejectedChecks++;
+            }
+        }
+
+        $this->actingAs($this->user);
+        
+        $this->getJson('api/v1/checks/status/rejected')
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonCount($rejectedChecks)
+            ->assertJsonStructure([[
+                'file',
+                'description',
+                'amount',
+                'status'
+            ]]);
+    }
+
+    public function testShouldListRejectedChecksAdmin()
+    {
+        $this->actingAs($this->admin);
 
         $checks = Check::factory()->times(5)->create();
 

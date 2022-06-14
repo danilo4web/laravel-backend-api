@@ -51,6 +51,7 @@ class UserController extends Controller
 
         $account = $this->createAnAccount($user->id, $data);
         $user['account_number'] = $account['number'];
+        $user['account_id'] = $account['id'];
 
         $token = $user->createToken('auth_token')->plainTextToken;
 

@@ -61,6 +61,22 @@ class TransactionControllerTest extends TestCase
             ->assertJsonCount($creditInfo['processedChecks']);
     }
 
+    public function testShouldReturnTransactionsPerMonth()
+    {
+        $payload = [
+            "account_id" => 1
+        ];
+
+        $creditInfo = $this->generateChecksAndApproveItAsCreditTransactions(10);
+
+        $this->actingAs($this->user);
+
+        $response = $this->postJson('/api/v1/transactions/month/' . date('Y') . '-' . date('m'), $payload)
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure([['description', 'amount']])
+            ->assertJsonCount($creditInfo['processedChecks']);
+    }
+
     private function generateChecksAndApproveItAsCreditTransactions($quantity): array
     {
         $checks = Check::factory()->times($quantity)->create();

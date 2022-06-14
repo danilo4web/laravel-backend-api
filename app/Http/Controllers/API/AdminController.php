@@ -41,7 +41,7 @@ class AdminController extends Controller
             'password' => Hash::make($data['password'])
         ]);
 
-        $token = $admin->createToken();
+        $token = $admin->createToken('auth_token')->plainTextToken;
 
         return response()
             ->json([

@@ -15,7 +15,7 @@ class Admin extends Authenticatable
     use Notifiable;
     
     protected $guard = 'admin';
-
+    
     public const ENABLE = 1;
     public const DISABLED = 0;
 

@@ -5,43 +5,28 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AccountResource;
 use App\Repositories\Contracts\AccountRepositoryInterface;
+use App\Repositories\Contracts\CustomerRepositoryInterface;
 use App\Repositories\Contracts\TransactionRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
     private TransactionRepositoryInterface $transactionRepository;
     private AccountRepositoryInterface $accountRepository;
+    private CustomerRepositoryInterface $customerRepository;
 
     public function __construct(
         AccountRepositoryInterface $accountRepository,
-        TransactionRepositoryInterface $transactionRepository
+        TransactionRepositoryInterface $transactionRepository,
+        CustomerRepositoryInterface $customerRepository
     ) {
         $this->accountRepository = $accountRepository;
         $this->transactionRepository = $transactionRepository;
-    }
-
-    public function index(): JsonResponse
-    {
-        $account = $this->accountRepository->all();
-
-        return response()->json(AccountResource::collection($account), Response::HTTP_OK);
-    }
-
-    public function store(Request $request): JsonResponse
-    {
-        $data = $request->validate(
-            [
-            'number' => 'required',
-            'customer_id' => 'required|numeric'
-            ]
-        );
-
-        $account = $this->accountRepository->store($data);
-
-        return response()->json(new AccountResource($account), Response::HTTP_CREATED);
+        $this->customerRepository = $customerRepository;
+        
     }
 
     public function show(int $accountId): JsonResponse
@@ -51,36 +36,22 @@ class AccountController extends Controller
         return response()->json(new AccountResource($account), Response::HTTP_OK);
     }
 
-    public function update(Request $request, int $accountId): JsonResponse
-    {
-        $data = $request->all();
-
-        $account = $this->accountRepository->update($accountId, $data);
-
-        return response()->json(new AccountResource($account), Response::HTTP_OK);
-    }
-
-    public function delete(int $accountId): JsonResponse
-    {
-        $this->accountRepository->delete($accountId);
-
-        return response()->json(null, Response::HTTP_NO_CONTENT);
-    }
-
     public function resume(Request $request, string $month)
     {
         $data = $request->all();
 
-        $balance = $this->accountRepository->getBalance($data['account_id']);
+        $accountId = $this->getAccountId();
+
+        $balance = $this->accountRepository->getBalance($accountId);
 
         $expenseAmount = $this->transactionRepository->getTotalTransactionsAmountPerMonth(
-            $data['account_id'],
+            $accountId,
             $month,
             'debit'
         );
 
         $incomesAmount = $this->transactionRepository->getTotalTransactionsAmountPerMonth(
-            $data['account_id'],
+            $accountId,
             $month,
             'credit'
         );
@@ -90,5 +61,20 @@ class AccountController extends Controller
             'expenseAmount' => $expenseAmount,
             'incomesAmount' => $incomesAmount
         ], Response::HTTP_OK);
+    }
+
+    private function getAccountId()
+    {
+        $user = Auth::guard('api')->user();
+
+        if (!$user) {
+            return null;
+        }
+
+        $customer = $this->customerRepository->findCustomerByUser($user->id);
+
+        $account = $this->accountRepository->findAccountByCustomer($customer->id);
+
+        return $account->id ?? null;
     }
 }

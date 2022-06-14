@@ -41,20 +41,45 @@ class CheckController extends Controller
             return response()->json(['message' => 'Invalid payload!'], 403);
         }
 
-        $checkCollection = $this->checkRepository->findByStatus($status);
+        $accountId = $this->getAccountId();
+        if (!$accountId) {
+            $checkCollection = $this->checkRepository->findByStatus($status);
+
+            return response()->json(CheckResource::collection($checkCollection));
+        }
+
+        $checkCollection = $this->checkRepository->findByAccountAndStatus($accountId, $status);
 
         return response()->json(CheckResource::collection($checkCollection));
     }
 
-    public function listChecks()
+    private function getAccountId()
     {
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
+
+        if (!$user) {
+            return null;
+        }
 
         $customer = $this->customerRepository->findCustomerByUser($user->id);
 
-        $sccount = $this->accountRepository->findAccountByCustomer($customer->id);
+        $account = $this->accountRepository->findAccountByCustomer($customer->id);
 
-        $checks = $this->checkRepository->findByAccount($sccount->id);
+        return $account->id ?? null;
+    }
+
+
+    public function listChecks()
+    {
+        $accountId = $this->getAccountId();
+
+        if (!$accountId) {
+            $checks = $this->checkRepository->all();
+
+            return response()->json(CheckResource::collection($checks));
+        }
+
+        $checks = $this->checkRepository->findByAccount($accountId);
 
         return response()->json(CheckResource::collection($checks));
     }
@@ -130,6 +155,7 @@ class CheckController extends Controller
     {
         $data = $request->all();
         $data['status'] = 'pending';
+        $data['account_id'] = $this->getAccountId();
 
         try {
             $check = $this->checkRepository->store($data);

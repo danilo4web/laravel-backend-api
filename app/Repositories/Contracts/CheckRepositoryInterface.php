@@ -17,4 +17,6 @@ interface CheckRepositoryInterface
     public function findByStatus(string $status);
 
     public function findByAccount(int $accountId);
+
+    public function findByAccountAndStatus(int $accountId, string $status);
 }

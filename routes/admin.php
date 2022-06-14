@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'adminLogin']);
 
 Route::group(['middleware' => ['auth:admin']], function () {
+    Route::post('/register', [App\Http\Controllers\API\AdminController::class, 'register']);
+
     Route::get('/profile', function (Request $request) {
         return Auth::guard('admin')->user();
     });
@@ -16,4 +18,6 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('checks/status/{status}', [App\Http\Controllers\API\CheckController::class, 'statusList']);
     Route::get('checks/{check}', [App\Http\Controllers\API\CheckController::class, 'show']);
     Route::get('checks', [App\Http\Controllers\API\CheckController::class, 'listChecks']);
+
+    Route::get('accounts', [App\Http\Controllers\API\AccountController::class, 'index']);
 });
