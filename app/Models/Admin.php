@@ -13,9 +13,9 @@ class Admin extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
-    
+
     protected $guard = 'admin';
-    
+
     public const ENABLE = 1;
     public const DISABLED = 0;
 

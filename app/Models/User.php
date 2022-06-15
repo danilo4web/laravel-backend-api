@@ -13,9 +13,8 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
-    
-    protected $guard = 'api';
 
+    protected $guard = 'api';
     public const ENABLE = 1;
     public const DISABLED = 0;
 

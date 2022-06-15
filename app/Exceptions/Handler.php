@@ -40,12 +40,12 @@ class Handler extends ExceptionHandler
         $this->renderable(function (Exception $e, $request) {
             return $this->handleException($request, $e);
         });
-     }
+    }
 
-     public function handleException($request, Exception $exception)
-     {
-        if($exception instanceof MethodNotAllowedHttpException) {
-        return response('The specified URL cannot be  found.', Response::HTTP_NOT_FOUND);
+    public function handleException($request, Exception $exception)
+    {
+        if ($exception instanceof MethodNotAllowedHttpException) {
+            return response('The specified URL cannot be  found.', Response::HTTP_NOT_FOUND);
         }
-     }
+    }
 }

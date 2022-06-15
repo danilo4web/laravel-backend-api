@@ -24,16 +24,10 @@ class AuthController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    
     public function login(Request $request)
     {
-        if (!Auth::attempt([
-            'email' => $request->email, 
-            'password' => $request->password,
-            'is_active' => 1
-        ])) {
-            return response()
-                ->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
+        if (!Auth::attempt(['email' => $request->email,'password' => $request->password,'is_active' => 1])) {
+            return response()->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
 
         config(['sanctum.guard' => 'user']);
