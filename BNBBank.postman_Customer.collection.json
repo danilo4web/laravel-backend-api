@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "d18357c4-587a-489e-a74a-675a7062d73e",
+		"name": "BNB Bank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Customer] - Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"danilo\",\n    \"email\": \"danilo4weab@gmail.com\",\n    \"password\": \"152634789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/register",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"danilo4web@gmail.c1om\",\n    \"password\": \"152634789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/login",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"check_id\": 1, \n    \"status\": \"rejected\", \n    \"admin_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/profile",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "5|vsDuD0NRL2yTtJIsI0sGfgFwZ9vlh7uT5Zzve8Uu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"check_id\": 1, \n    \"status\": \"rejected\", \n    \"admin_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/logout",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - Checks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/checks",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"checks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - Account Resume",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/accounts/resume/2022-06",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"resume",
+						"2022-06"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - Debit Transactions Per Month",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/transactions/credits/2022-06",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						"credits",
+						"2022-06"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - Credit Transactions Per Month",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/transactions/debits/2022-06",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						"debits",
+						"2022-06"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - Debit Money (-)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 1.00, \n    \"account_id\": 1,\n    \"description\": \"sorvete\",\n    \"date\": \"2022-06-04\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/purchase",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - New Check",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"file\": \"https://via.placeholder.com/640x480.png/001133?text=autem\",\n    \"description\": \"Dicki Group\",\n    \"amount\": 19.00\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/checks",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"checks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - Approved Checks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/checks/status/approved",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"checks",
+						"status",
+						"approved"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - Pending Checks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/checks/status/pending",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"checks",
+						"status",
+						"pending"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Customer] - Rejected Checks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/checks/status/rejected",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"checks",
+						"status",
+						"rejected"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "11|UdbG7Ezh8iPOTy2wZ8SKCBlDflMrEZ9QEMhehbDJ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

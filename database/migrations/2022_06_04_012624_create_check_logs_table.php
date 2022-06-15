@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateCheckLogsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('check_logs', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('check_id')->index();
+            $table->unsignedBigInteger('admin_id')->index();
+            $table->enum('status', ['pending', 'approved', 'rejected'])->index();
+            $table->timestamps();
+
+            $table->foreign('check_id')->references('id')->on('checks');
+            $table->foreign('admin_id')->references('id')->on('admins');
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('check_logs');
+    }
+}

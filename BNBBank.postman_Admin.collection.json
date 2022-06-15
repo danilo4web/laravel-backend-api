@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "d932e501-7df4-4b0d-ae24-70c3400cfc29",
+		"name": "BNB Bank - Admin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[ADMIN] - Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"admin@bnb.com\",\n    \"password\": \"152634789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/login",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|XTC0Bv6qYW6AkRNAqaGyBucuCd9xUIwaskUFDDpL",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"danilo\",\n    \"email\": \"danilo\",\n    \"password\": \"teste\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/profile",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Accounts List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/accounts",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - GET All Checks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Approve a Check",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"admin_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks/4/approve",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks",
+						"4",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Reject a Check",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"check_id\": 1, \n    \"status\": \"rejected\", \n    \"admin_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks/10/reject",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks",
+						"10",
+						"reject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Rejected Checks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks/status/rejected",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks",
+						"status",
+						"rejected"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Pending Checks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks/status/pendingaa",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks",
+						"status",
+						"pendingaa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN] - Approved Checks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|CDLZdHR0aNdgTH7dLJvBxCjkgKN70RwQGNhidIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8080/api/v1/admin/checks/status/approved",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"checks",
+						"status",
+						"approved"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
