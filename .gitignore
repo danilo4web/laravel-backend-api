@@ -4,5 +4,4 @@ vendor
 code-coverage/
 storage/
 *.log
-*.lock
 *.cache
