@@ -26,7 +26,6 @@ class AccountController extends Controller
         $this->accountRepository = $accountRepository;
         $this->transactionRepository = $transactionRepository;
         $this->customerRepository = $customerRepository;
-        
     }
 
     public function show(int $accountId): JsonResponse

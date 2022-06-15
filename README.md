@@ -32,7 +32,8 @@
 ```docker-compose run --rm artisan queue:work --tries=1```
 
 ## EER Database
-![alt text](https://raw.githubusercontent.com/danilo4web/laravel-backend-api/feature/development/database/eer.png)
+![alt text](https://raw.githubusercontent.com/danilo4web/laravel-backend-api/main/database/eer.png)
 
 ## Postman collection with all the endpoints:
-[download here](https://raw.githubusercontent.com/danilo4web/laravel-backend-api/feature/development/BNBBank.postman_collection.json)
+[Customer Endpoints Collection](https://raw.githubusercontent.com/danilo4web/laravel-backend-api/main/BNBBank.postman_Customer.collection.json)
+[Admin Endpoints Collection](https://raw.githubusercontent.com/danilo4web/laravel-backend-api/main/BNBBank.postman_Admin.collection.json)

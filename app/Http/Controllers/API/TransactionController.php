@@ -34,7 +34,7 @@ class TransactionController extends Controller
         $data = $request->all();
 
         $account = $this->getAccount();
-        
+
         $transactions = $this->transactionRepository->findByTypePerMonth($account->id, 'debit', $month);
 
         return response()->json(
