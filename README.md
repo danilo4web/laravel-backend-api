@@ -23,22 +23,22 @@ This is a Laravel application to demonstrate knowledge about the Laravel APIs de
 #### Create .env file configuration (from the example env file):
 ```cp .env.example .env```
 
-#### Setup docker environment:
-```docker-compose up -d```
+#### Build docker environment:
+```docker-compose up -d --build```
 
 #### Composer update:
-```docker-compose run --rm composer update```
+```docker-compose run --user=1000 --rm composer update```
 
 #### Key generate:
 ```docker-compose run artisan key:generate```
 
-#### Create the database and seed :
+#### Create the database and seed (only in case you need data to a demo):
 ```docker-compose run --rm artisan migrate --seed```
 
 #### Run the integration tests:
 ```docker-compose run --rm php vendor/bin/phpunit --colors=always```
 
-#### Export a HTML coverage test:
+#### Export HTML coverage test:
 ```docker-compose run --rm php vendor/bin/phpunit --colors=always --coverage-html code-coverage```
 
 #### Check PSR-12:
@@ -50,7 +50,7 @@ This is a Laravel application to demonstrate knowledge about the Laravel APIs de
 #### EER Database:
 ![alt text](https://raw.githubusercontent.com/danilo4web/laravel-backend-api/main/database/eer.png)
 
-#### Postman collection with all the endpoints:
+#### Postman collection with the endpoints from the app:
 Customer Endpoints: [Collection](https://raw.githubusercontent.com/danilo4web/laravel-backend-api/main/BNBBank.postman_Customer.collection.json)
 
 Admin Endpoints [Collection](https://raw.githubusercontent.com/danilo4web/laravel-backend-api/main/BNBBank.postman_Admin.collection.json)
