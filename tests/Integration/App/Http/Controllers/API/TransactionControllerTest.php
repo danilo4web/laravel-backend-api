@@ -40,7 +40,8 @@ class TransactionControllerTest extends TestCase
         $payload = [
             "account_id" => 1
         ];
-        $response = $this->json('post', '/api/v1/transactions/debits/2022-06', $payload)
+
+        $this->json('post', '/api/v1/transactions/debits/' . date('Y-m'), $payload)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([['description', 'date', 'amount']]);
     }
@@ -55,7 +56,7 @@ class TransactionControllerTest extends TestCase
 
         $this->actingAs($this->user);
 
-        $response = $this->postJson('/api/v1/transactions/credits/' . date('Y') . '-' . date('m'), $payload)
+        $this->postJson('/api/v1/transactions/credits/' . date('Y') . '-' . date('m'), $payload)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([['description', 'date', 'amount']])
             ->assertJsonCount($creditInfo['processedChecks']);
@@ -71,7 +72,7 @@ class TransactionControllerTest extends TestCase
 
         $this->actingAs($this->user);
 
-        $response = $this->postJson('/api/v1/transactions/month/' . date('Y') . '-' . date('m'), $payload)
+        $this->postJson('/api/v1/transactions/month/' . date('Y') . '-' . date('m'), $payload)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([['description', 'amount']])
             ->assertJsonCount($creditInfo['processedChecks']);
@@ -112,7 +113,7 @@ class TransactionControllerTest extends TestCase
             'date' => date('Y-m-d')
         ];
 
-        $response = $this->postJson("/api/v1/purchase", $payload)
+        $this->postJson("/api/v1/purchase", $payload)
             ->assertStatus(Response::HTTP_CREATED)
             ->assertJson(['message' => 'Done! New balance is: ' . number_format($info['amount'] - $purchaseAmount, 2)]);
     }
@@ -130,7 +131,7 @@ class TransactionControllerTest extends TestCase
             'date' => date('Y-m-d')
         ];
 
-        $response = $this->postJson("/api/v1/purchase", $payload)
+        $this->postJson("/api/v1/purchase", $payload)
             ->assertStatus(Response::HTTP_BAD_REQUEST)
             ->assertJson(['errors' => ['amount' => ['The amount field is required.']]]);
     }
@@ -149,8 +150,8 @@ class TransactionControllerTest extends TestCase
         ];
 
         $this->postJson("/api/v1/purchase", $payload)
-        ->assertStatus(Response::HTTP_FORBIDDEN)
-        ->assertJson(['message' => 'Account does not have enough money!']);
+            ->assertStatus(Response::HTTP_FORBIDDEN)
+            ->assertJson(['message' => 'Account does not have enough money!']);
     }
 
     public function testShowTransaction()
@@ -159,7 +160,7 @@ class TransactionControllerTest extends TestCase
 
         $transaction = Transaction::factory()->create();
 
-        $response = $this->json('get', '/api/v1/transactions/' . $transaction['id'])
+        $this->json('get', '/api/v1/transactions/' . $transaction['id'])
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['description', 'amount', 'type']);
     }
